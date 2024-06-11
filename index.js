@@ -139,6 +139,7 @@ function toArray(arr, value) {
   arr.push(value);
 }
 
+// Runs a callback function on each item in the tree using inOrder tree traversal
 function inOrder(tree, callback = toArray) {
   const inOrderTracker = [];
   if (tree === null) return null;
@@ -148,13 +149,17 @@ function inOrder(tree, callback = toArray) {
   return inOrderTracker;
 }
 
+// Logic making the recursion take place
 function inOrderLogic(leaf, callback) {
+  // Base case
   if (leaf === null) return;
+  //Search left first
   inOrderLogic(leaf.left, callback);
   callback(leaf.data);
   inOrderLogic(leaf.right, callback);
 }
 
+// Runs a callback function on every item in the tree using preOrder tree traversal
 function preOrder(tree, callback = toArray) {
   const preOrderTracker = [];
   if (tree === null) return null;
@@ -164,14 +169,32 @@ function preOrder(tree, callback = toArray) {
   return preOrderTracker;
 }
 
+// PreOrder traversal logic
 function preOrderLogic(leaf, callback) {
   if (leaf === null) return;
+  // Call back the data first then search left
   callback(leaf.data);
   preOrderLogic(leaf.left, callback);
   preOrderLogic(leaf.right, callback);
 }
 
-function postOrder(tree, callback = toArray) {}
+// RUns a callback function on every item in the tree using postOrder tree traversal
+function postOrder(tree, callback = toArray) {
+  const postOrderTracker = [];
+  if (tree === null) return null;
+  postOrderLogic(tree.root, (returnedData) =>
+    callback(postOrderTracker, returnedData)
+  );
+  return postOrderTracker;
+}
+
+// Post Order Traversal Logic
+function postOrderLogic(leaf, callback) {
+  if (leaf === null) return;
+  postOrderLogic(leaf.left, callback);
+  postOrderLogic(leaf.right, callback);
+  callback(leaf.data);
+}
 
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -227,4 +250,4 @@ console.log(inOrder(testTree));
 
 // Testing PreOrder Tree Traversal
 console.log(prettyPrint(testTree.root));
-console.log(preOrder(testTree));
+console.log(postOrder(testTree));
