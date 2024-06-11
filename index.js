@@ -98,6 +98,19 @@ function communism(value) {
   }
 }
 
+function find(value, tree) {
+  if (tree === null) {
+    return null;
+  }
+  if (tree.data === value) {
+    return tree;
+  } else if (value < tree.data) {
+    return find(value, tree.left);
+  } else if (value > tree.data) {
+    return find(value, tree.right);
+  }
+}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -127,10 +140,17 @@ const testTree = new Tree(testArray);
 // console.log(insert(14, testTree.root));
 // console.log(insert(88, testTree.root));
 // console.log(prettyPrint(testTree.root));
-console.log(prettyPrint(testTree.root));
+// console.log(prettyPrint(testTree.root));
 
-console.log(deleteItem(99, testTree.root));
-console.log(deleteItem(2, testTree.root));
-console.log(deleteItem(45, testTree.root));
+// Testing deletion
+// console.log(deleteItem(99, testTree.root));
+// console.log(deleteItem(2, testTree.root));
+// console.log(deleteItem(45, testTree.root));
 
-console.log(prettyPrint(testTree.root));
+// console.log(prettyPrint(testTree.root));
+
+// Testing find
+console.log(find(14, testTree.root));
+console.log(find(45, testTree.root));
+console.log(find(99, testTree.root));
+console.log(find(2, testTree.root));
