@@ -18,13 +18,14 @@ class Tree {
 
 // Function that takes a sorted array and turns it into a BST returning the root node
 function buildTree(array, start, end) {
+  // Base case - sets left/right as null when search tree is complete
   if (start > end) {
     return null;
   }
   const midPoint = parseInt((start + end) / 2);
   const midNode = new Node(array[midPoint]);
-  midNode.left = buildTree(array, start, midPoint - 1);
-  midNode.right = buildTree(array, midPoint + 1, end);
+  midNode.left = buildTree(array, start, midPoint - 1); // Recursively runs to set left side of tree
+  midNode.right = buildTree(array, midPoint + 1, end); // Same on right side
   return midNode;
 }
 
@@ -40,6 +41,7 @@ function sortArrayNoDuplicates(array) {
   return inOrder;
 }
 
+// Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
@@ -61,4 +63,4 @@ console.log(sortArrayNoDuplicates(testArray)); // Testing the sort array functio
 
 const testTree = new Tree(testArray);
 
-console.log(prettyPrint(testTree.root));
+console.log(prettyPrint(testTree.root)); // Testing that it creates a balanced search tree from given data
