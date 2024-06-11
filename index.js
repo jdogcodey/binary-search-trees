@@ -16,11 +16,12 @@ class Tree {
 
 function buildTree(array) {}
 
+// Function to sort array in order and remove duplicates
 function sortArrayNoDuplicates(array) {
   const inOrder = [
-    ...new Set(
+    ...new Set( // Create a set (doesn't have duplicates) and convert back into array using [...]
       array.sort((a, b) => {
-        return a - b;
+        return a - b; // Sort in ascending number order
       })
     ),
   ];
