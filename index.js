@@ -139,6 +139,40 @@ function toArray(arr, value) {
   arr.push(value);
 }
 
+function inOrder(tree, callback = toArray) {
+  const inOrderTracker = [];
+  if (tree === null) return null;
+  inOrderLogic(tree.root, (returnedData) =>
+    callback(inOrderTracker, returnedData)
+  );
+  return inOrderTracker;
+}
+
+function inOrderLogic(leaf, callback) {
+  if (leaf === null) return;
+  inOrderLogic(leaf.left, callback);
+  callback(leaf.data);
+  inOrderLogic(leaf.right, callback);
+}
+
+function preOrder(tree, callback = toArray) {
+  const preOrderTracker = [];
+  if (tree === null) return null;
+  preOrderLogic(tree.root, (returnedData) =>
+    callback(preOrderTracker, returnedData)
+  );
+  return preOrderTracker;
+}
+
+function preOrderLogic(leaf, callback) {
+  if (leaf === null) return;
+  callback(leaf.data);
+  preOrderLogic(leaf.left, callback);
+  preOrderLogic(leaf.right, callback);
+}
+
+function postOrder(tree, callback = toArray) {}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -184,5 +218,13 @@ const testTree = new Tree(testArray);
 // console.log(find(2, testTree.root));
 
 // Testing levelOrder
+// console.log(prettyPrint(testTree.root));
+// console.log(levelOrder(testTree));
+
+//Testing inOrder Tree Traversal
 console.log(prettyPrint(testTree.root));
-console.log(levelOrder(testTree));
+console.log(inOrder(testTree));
+
+// Testing PreOrder Tree Traversal
+console.log(prettyPrint(testTree.root));
+console.log(preOrder(testTree));
