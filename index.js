@@ -88,6 +88,7 @@ function deleteItem(value, tree) {
   return tree;
 }
 
+// Heads as far down the left of a branch as it can
 function communism(value) {
   if (value.left.left !== null) {
     communism(value.left);
@@ -98,6 +99,7 @@ function communism(value) {
   }
 }
 
+// Returns the node with the value
 function find(value, tree) {
   if (tree === null) {
     return null;
@@ -111,11 +113,13 @@ function find(value, tree) {
   }
 }
 
+// Applies callback function on each item in level-order
 function levelOrder(tree, callback = toArray) {
   if (tree === null) return null;
   const levelOrderTracker = [];
   const queue = [];
   queue.push(tree.root);
+  // Apply the callback function, then add both left and right to the queue
   while (queue.length > 0) {
     const firstInLine = queue[0];
     callback(levelOrderTracker, firstInLine.data);
@@ -130,6 +134,7 @@ function levelOrder(tree, callback = toArray) {
   return levelOrderTracker;
 }
 
+// Function to add to an array - might be a built in function?
 function toArray(arr, value) {
   arr.push(value);
 }
