@@ -111,6 +111,29 @@ function find(value, tree) {
   }
 }
 
+function levelOrder(tree, callback = toArray) {
+  if (tree === null) return null;
+  const levelOrderTracker = [];
+  const queue = [];
+  queue.push(tree.root);
+  while (queue.length > 0) {
+    const firstInLine = queue[0];
+    callback(levelOrderTracker, firstInLine.data);
+    if (firstInLine.left !== null) {
+      queue.push(firstInLine.left);
+    }
+    if (firstInLine.right !== null) {
+      queue.push(firstInLine.right);
+    }
+    queue.shift();
+  }
+  return levelOrderTracker;
+}
+
+function toArray(arr, value) {
+  arr.push(value);
+}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -150,7 +173,11 @@ const testTree = new Tree(testArray);
 // console.log(prettyPrint(testTree.root));
 
 // Testing find
-console.log(find(14, testTree.root));
-console.log(find(45, testTree.root));
-console.log(find(99, testTree.root));
-console.log(find(2, testTree.root));
+// console.log(find(14, testTree.root));
+// console.log(find(45, testTree.root));
+// console.log(find(99, testTree.root));
+// console.log(find(2, testTree.root));
+
+// Testing levelOrder
+console.log(prettyPrint(testTree.root));
+console.log(levelOrder(testTree));
