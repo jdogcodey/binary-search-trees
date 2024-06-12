@@ -196,6 +196,14 @@ function postOrderLogic(leaf, callback) {
   callback(leaf.data);
 }
 
+function height(node) {}
+
+function depth(leaf, tree) {
+  if (leaf === tree.data) return 0;
+  if (leaf < tree.data) return depth(leaf, tree.left) + 1;
+  if (leaf > tree.data) return depth(leaf, tree.right) + 1;
+}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -245,9 +253,11 @@ const testTree = new Tree(testArray);
 // console.log(levelOrder(testTree));
 
 //Testing inOrder Tree Traversal
-console.log(prettyPrint(testTree.root));
-console.log(inOrder(testTree));
+// console.log(prettyPrint(testTree.root));
+// console.log(inOrder(testTree));
 
 // Testing PreOrder Tree Traversal
-console.log(prettyPrint(testTree.root));
-console.log(postOrder(testTree));
+// console.log(prettyPrint(testTree.root));
+// console.log(postOrder(testTree));
+
+console.log(depth(14, testTree.root));
