@@ -211,6 +211,17 @@ function depth(value, tree) {
   if (value > tree.data) return depth(value, tree.right) + 1;
 }
 
+function isBalanced(tree) {
+  if (!tree) return "No tree";
+  const allNodes = preOrder(tree);
+  for (let i = 0; i < allNodes.length; i++) {
+    let leftHeight = height(find(allNodes[i], tree.root).left);
+    let rightHeight = height(find(allNodes[i], tree.root).right);
+    if (Math.abs(leftHeight - rightHeight) > 1) return false;
+  }
+  return true;
+}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -272,5 +283,13 @@ const testTree = new Tree(testArray);
 // console.log(depth(44, testTree.root));
 
 // Testing height
+// console.log(prettyPrint(testTree.root));
+// console.log(height(find(99, testTree.root)));
+
+// Testing isBalanced
 console.log(prettyPrint(testTree.root));
-console.log(height(find(99, testTree.root)));
+console.log(isBalanced(testTree));
+insert(100, testTree.root);
+insert(101, testTree.root);
+console.log(prettyPrint(testTree.root));
+console.log(isBalanced(testTree));
