@@ -222,6 +222,12 @@ function isBalanced(tree) {
   return true;
 }
 
+function reBalance(tree) {
+  const currentTree = preOrder(tree);
+  const sortedArr = sortArrayNoDuplicates(currentTree);
+  tree.root = buildTree(sortedArr, 0, sortedArr.length - 1);
+}
+
 // Function provided by The Odin Project to help with visualisation
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -293,3 +299,7 @@ insert(100, testTree.root);
 insert(101, testTree.root);
 console.log(prettyPrint(testTree.root));
 console.log(isBalanced(testTree));
+console.log(prettyPrint(testTree.root));
+reBalance(testTree);
+console.log(isBalanced(testTree));
+console.log(prettyPrint(testTree.root));
