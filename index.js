@@ -196,12 +196,19 @@ function postOrderLogic(leaf, callback) {
   callback(leaf.data);
 }
 
-function height(node) {}
+function height(node) {
+  if (node == null) {
+    return -1;
+  }
+  const leftHeight = height(node.left);
+  const rightHeight = height(node.right);
+  return Math.max(leftHeight, rightHeight) + 1;
+}
 
-function depth(leaf, tree) {
-  if (leaf === tree.data) return 0;
-  if (leaf < tree.data) return depth(leaf, tree.left) + 1;
-  if (leaf > tree.data) return depth(leaf, tree.right) + 1;
+function depth(value, tree) {
+  if (value === tree.data) return 0;
+  if (value < tree.data) return depth(value, tree.left) + 1;
+  if (value > tree.data) return depth(value, tree.right) + 1;
 }
 
 // Function provided by The Odin Project to help with visualisation
@@ -260,4 +267,10 @@ const testTree = new Tree(testArray);
 // console.log(prettyPrint(testTree.root));
 // console.log(postOrder(testTree));
 
-console.log(depth(14, testTree.root));
+// Testing Depth
+// console.log(prettyPrint(testTree.root));
+// console.log(depth(44, testTree.root));
+
+// Testing height
+console.log(prettyPrint(testTree.root));
+console.log(height(find(99, testTree.root)));
